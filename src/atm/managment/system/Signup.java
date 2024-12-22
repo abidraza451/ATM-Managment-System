@@ -207,6 +207,53 @@ public class Signup extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        String formno=first;
+        String name=textName.getText();
+        String fname=textFname.getText();
+        String dob = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
+        String gender=null;
+        if(r1.isSelected()){
+            gender="Male";
+        }
+        else if(r2.isSelected()){
+            gender="Female";
+        }
+
+        String email=textEmail.getText();
+        String merital=null;
+        if(m1.isSelected()){
+            merital="Married";
+        }
+        else if(m2.isSelected()){
+            merital="Unmarried";
+        }
+        else if(m3.isSelected()){
+            merital="Other";
+        }
+        String address=textAdd.getText();
+        String city=textCity.getText();
+        String pincode=textPin.getText();
+        String state=textState.getText();
+
+
+        try{
+            if(textName.getText().equals("")){
+                JOptionPane.showMessageDialog(null,"Fill all the fields");
+            }
+            else {
+                Config con1 = new Config();
+                String q= "Insert into signup values('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+gender+"','"+email+"','"+merital+"','"+address+"','"+city+"','"+pincode+"','"+state+"')";
+
+                con1.statement.executeUpdate(q);
+                new Signup2();
+                setVisible(false);
+            }
+
+        } catch (Exception E) {
+            E.printStackTrace();
+        }
+
+
     }
 
     public static void main(String[] args) {
